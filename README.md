@@ -45,7 +45,7 @@ crime-project/
 
 | Section | Tasks | Owner | Status |
 |---------|-------|-------|--------|
-| A — Preprocessing and Model Definition | 1, 2 | **<YOUR NAME HERE>** | Done |
+| A — Preprocessing and Model Definition | 1, 2 | **<Ali>** | Done |
 | B — Estimation and Inference           | 3, 4 | Mohamed               | In progress |
 | C — Model Selection and Diagnostics    | 5, 6 | Ayesha                | In progress |
 
