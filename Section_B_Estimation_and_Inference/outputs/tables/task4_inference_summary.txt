@@ -1,0 +1,29 @@
+SECTION B - TASK 4: INFERENCE SUMMARY
+============================================================
+
+INDIVIDUAL t-TESTS
+------------------------------------------------------------
+const: t = 24.1757, p = 0.0000 -> Reject H0
+PctPopUnderPov: t = -3.3019, p = 0.0010 -> Reject H0
+PctNotHSGrad: t = 0.1524, p = 0.8789 -> Fail to reject H0
+PctUnemployed: t = 1.2355, p = 0.2168 -> Fail to reject H0
+PctKids2Par: t = -26.4305, p = 0.0000 -> Reject H0
+PctVacantBoarded: t = 4.5922, p = 0.0000 -> Reject H0
+PopDens: t = 4.1477, p = 0.0000 -> Reject H0
+population: t = 9.2610, p = 0.0000 -> Reject H0
+
+95% CONFIDENCE INTERVALS
+------------------------------------------------------------
+const: [0.6204, 0.7300] -> excludes 0
+PctPopUnderPov: [-0.1464, -0.0373] -> excludes 0
+PctNotHSGrad: [-0.0488, 0.0570] -> contains 0
+PctUnemployed: [-0.0225, 0.0991] -> contains 0
+PctKids2Par: [-0.8243, -0.7104] -> excludes 0
+PctVacantBoarded: [0.0515, 0.1282] -> excludes 0
+PopDens: [0.0392, 0.1096] -> excludes 0
+population: [0.2147, 0.3301] -> excludes 0
+
+JOINT F-TESTS
+------------------------------------------------------------
+disadvantage_block: F = 326.6267, p = 0.0000, df = (4, 1986) -> Reject H0
+housing_urban_scale_block: F = 56.9546, p = 0.0000, df = (3, 1986) -> Reject H0

@@ -1,0 +1,3 @@
+test_name,null_hypothesis,restriction,f_statistic,p_value,df_num,df_denom,reject_at_5pct,decision,interpretation
+disadvantage_block,H0: the disadvantage/family-structure coefficients are jointly equal to zero.,"PctPopUnderPov = 0, PctNotHSGrad = 0, PctUnemployed = 0, PctKids2Par = 0",326.62665313403375,3.8552732913814674e-216,4.0,1986.0,True,Reject H0,Reject H0 at the 5% level. The variables in this group are jointly significant.
+housing_urban_scale_block,H0: the housing/urban-scale coefficients are jointly equal to zero.,"PctVacantBoarded = 0, PopDens = 0, population = 0",56.95460034656216,2.573069065607175e-35,3.0,1986.0,True,Reject H0,Reject H0 at the 5% level. The variables in this group are jointly significant.
