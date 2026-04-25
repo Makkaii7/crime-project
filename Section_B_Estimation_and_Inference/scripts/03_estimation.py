@@ -12,6 +12,7 @@ What this script does:
        outputs/tables/coefficients.csv.
     5. Save a compact model-fit table to outputs/tables/model_fit_summary.csv.
     6. Save the full statsmodels text summary to outputs/tables/ols_summary.txt.
+    7. Save diagnostic and model-visualisation plots to outputs/plots/.
 
 Run from project root:
     python Section_B_Estimation_and_Inference/scripts/03_estimation.py
@@ -19,6 +20,7 @@ Run from project root:
 
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import statsmodels.api as sm
 
@@ -34,10 +36,18 @@ import statsmodels.api as sm
 SECTION_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = REPO_ROOT / "data" / "communities_baseline_model.csv"
+
 TABLES_DIR = SECTION_ROOT / "outputs" / "tables"
+PLOTS_DIR = SECTION_ROOT / "outputs" / "plots"
+
 COEFFICIENTS_PATH = TABLES_DIR / "coefficients.csv"
 MODEL_FIT_PATH = TABLES_DIR / "model_fit_summary.csv"
 SUMMARY_TEXT_PATH = TABLES_DIR / "ols_summary.txt"
+
+ACTUAL_VS_PRED_PATH = PLOTS_DIR / "actual_vs_predicted.png"
+RESIDUALS_VS_FITTED_PATH = PLOTS_DIR / "residuals_vs_fitted.png"
+QQ_PLOT_PATH = PLOTS_DIR / "qq_plot_residuals.png"
+COEFFICIENT_PLOT_PATH = PLOTS_DIR / "coefficient_plot.png"
 
 
 # ---------------------------------------------------------------------------
@@ -121,8 +131,98 @@ def build_model_fit_table(model) -> pd.DataFrame:
     return fit_table
 
 
+def save_actual_vs_predicted_plot(model, model_df: pd.DataFrame) -> None:
+    """Save a scatter plot of actual vs predicted values."""
+    y_actual = model_df[TARGET]
+    y_pred = model.fittedvalues
+
+    plt.figure(figsize=(7, 5))
+    plt.scatter(y_pred, y_actual, alpha=0.7)
+    plt.plot(
+        [y_actual.min(), y_actual.max()],
+        [y_actual.min(), y_actual.max()],
+        linestyle="--",
+    )
+    plt.xlabel("Predicted values")
+    plt.ylabel("Actual values")
+    plt.title("Actual vs Predicted")
+    plt.tight_layout()
+    plt.savefig(ACTUAL_VS_PRED_PATH, dpi=300, bbox_inches="tight")
+    plt.close()
+
+
+def save_residuals_vs_fitted_plot(model) -> None:
+    """Save a residuals vs fitted plot."""
+    fitted = model.fittedvalues
+    residuals = model.resid
+
+    plt.figure(figsize=(7, 5))
+    plt.scatter(fitted, residuals, alpha=0.7)
+    plt.axhline(0, linestyle="--")
+    plt.xlabel("Fitted values")
+    plt.ylabel("Residuals")
+    plt.title("Residuals vs Fitted")
+    plt.tight_layout()
+    plt.savefig(RESIDUALS_VS_FITTED_PATH, dpi=300, bbox_inches="tight")
+    plt.close()
+
+
+def save_qq_plot(model) -> None:
+    """Save a QQ plot of residuals."""
+    fig = sm.qqplot(model.resid, line="45", fit=True)
+    plt.title("QQ Plot of Residuals")
+    plt.tight_layout()
+    fig.savefig(QQ_PLOT_PATH, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def save_coefficient_plot(model) -> None:
+    """Save a coefficient plot with 95% confidence intervals."""
+    conf_int = model.conf_int(alpha=0.05)
+    coef_table = pd.DataFrame(
+        {
+            "term": model.params.index,
+            "coef": model.params.values,
+            "ci_lower_95": conf_int.iloc[:, 0].values,
+            "ci_upper_95": conf_int.iloc[:, 1].values,
+        }
+    )
+
+    # Exclude intercept from the coefficient plot to keep the figure cleaner.
+    coef_table = coef_table[coef_table["term"] != "const"].copy()
+    coef_table = coef_table.sort_values("coef")
+
+    lower_errors = coef_table["coef"] - coef_table["ci_lower_95"]
+    upper_errors = coef_table["ci_upper_95"] - coef_table["coef"]
+
+    plt.figure(figsize=(8, 5))
+    plt.errorbar(
+        x=coef_table["coef"],
+        y=coef_table["term"],
+        xerr=[lower_errors, upper_errors],
+        fmt="o",
+        capsize=4,
+    )
+    plt.axvline(0, linestyle="--")
+    plt.xlabel("Coefficient estimate")
+    plt.ylabel("Predictor")
+    plt.title("OLS Coefficients with 95% Confidence Intervals")
+    plt.tight_layout()
+    plt.savefig(COEFFICIENT_PLOT_PATH, dpi=300, bbox_inches="tight")
+    plt.close()
+
+
+def save_all_plots(model, model_df: pd.DataFrame) -> None:
+    """Generate and save all requested plots."""
+    save_actual_vs_predicted_plot(model, model_df)
+    save_residuals_vs_fitted_plot(model)
+    save_qq_plot(model)
+    save_coefficient_plot(model)
+
+
 def main() -> None:
     TABLES_DIR.mkdir(parents=True, exist_ok=True)
+    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
     model_df = load_baseline_data()
     model = fit_ols(model_df)
@@ -134,9 +234,16 @@ def main() -> None:
     fit_table.to_csv(MODEL_FIT_PATH, index=False)
     SUMMARY_TEXT_PATH.write_text(model.summary().as_text(), encoding="utf-8")
 
+    save_all_plots(model, model_df)
+
     print(f"\nSaved coefficient table -> {COEFFICIENTS_PATH.relative_to(REPO_ROOT)}")
     print(f"Saved fit summary      -> {MODEL_FIT_PATH.relative_to(REPO_ROOT)}")
     print(f"Saved OLS text summary -> {SUMMARY_TEXT_PATH.relative_to(REPO_ROOT)}")
+
+    print(f"\nSaved plots -> {ACTUAL_VS_PRED_PATH.relative_to(REPO_ROOT)}")
+    print(f"Saved plots -> {RESIDUALS_VS_FITTED_PATH.relative_to(REPO_ROOT)}")
+    print(f"Saved plots -> {QQ_PLOT_PATH.relative_to(REPO_ROOT)}")
+    print(f"Saved plots -> {COEFFICIENT_PLOT_PATH.relative_to(REPO_ROOT)}")
 
     print("\n=== Baseline OLS estimation summary ===")
     print(coefficient_table.round(4).to_string(index=False))
