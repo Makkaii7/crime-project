@@ -6,6 +6,7 @@
 - **Task 3:** Fit an OLS regression using `../../data/communities_baseline_model.csv` as input. Use statsmodels so you get coefficients, standard errors, t-stats, and p-values. Interpret each coefficient in plain English.
 - **Task 4:** Use the t-tests from your regression output (individual significance). Run joint F-tests on meaningful groups of variables. Construct and interpret 95% confidence intervals for each coefficient.
 
+
 ## Relevant lectures
 - L3, L4: OLS estimation, statistical properties, Gauss-Markov
 - L5: Residuals, hypothesis testing, t-tests, F-tests, confidence intervals
