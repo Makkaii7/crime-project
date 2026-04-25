@@ -1,0 +1,2 @@
+n_obs,n_parameters_including_intercept,df_model,df_resid,r_squared,adj_r_squared,f_statistic,f_pvalue,aic,bic,rmse
+1994,8,7.0,1986.0,0.5866148367132653,0.5851577893099384,402.6051831765077,0.0,-1897.3692993561667,-1852.5861157519926,0.1500614878177059

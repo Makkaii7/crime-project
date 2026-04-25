@@ -1,0 +1,31 @@
+                             OLS Regression Results                            
+===============================================================================
+Dep. Variable:     ViolentCrimesPerPop   R-squared:                       0.587
+Model:                             OLS   Adj. R-squared:                  0.585
+Method:                  Least Squares   F-statistic:                     402.6
+Date:                 Sat, 25 Apr 2026   Prob (F-statistic):               0.00
+Time:                         22:19:14   Log-Likelihood:                 956.68
+No. Observations:                 1994   AIC:                            -1897.
+Df Residuals:                     1986   BIC:                            -1853.
+Df Model:                            7                                         
+Covariance Type:             nonrobust                                         
+====================================================================================
+                       coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+const                0.6752      0.028     24.176      0.000       0.620       0.730
+PctPopUnderPov      -0.0918      0.028     -3.302      0.001      -0.146      -0.037
+PctNotHSGrad         0.0041      0.027      0.152      0.879      -0.049       0.057
+PctUnemployed        0.0383      0.031      1.235      0.217      -0.023       0.099
+PctKids2Par         -0.7674      0.029    -26.430      0.000      -0.824      -0.710
+PctVacantBoarded     0.0898      0.020      4.592      0.000       0.051       0.128
+PopDens              0.0744      0.018      4.148      0.000       0.039       0.110
+population           0.2724      0.029      9.261      0.000       0.215       0.330
+==============================================================================
+Omnibus:                      348.344   Durbin-Watson:                   2.013
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              816.384
+Skew:                           0.974   Prob(JB):                    5.30e-178
+Kurtosis:                       5.455   Cond. No.                         18.4
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
