@@ -27,3 +27,4 @@ JOINT F-TESTS
 ------------------------------------------------------------
 disadvantage_block: F = 326.6267, p = 0.0000, df = (4, 1986) -> Reject H0
 housing_urban_scale_block: F = 56.9546, p = 0.0000, df = (3, 1986) -> Reject H0
+non_significant_pair: F = 1.0364, p = 0.3549, df = (2, 1986) -> Fail to reject H0

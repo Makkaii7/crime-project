@@ -260,6 +260,15 @@ def build_joint_f_tests_table(model) -> pd.DataFrame:
             "PctVacantBoarded = 0, PopDens = 0, population = 0",
             "H0: the housing/urban-scale coefficients are jointly equal to zero."
         ),
+        # Joint test on the two individually non-significant predictors. This is
+        # the test that informs Task 5 model selection: if we cannot reject H0,
+        # the data is consistent with dropping both PctNotHSGrad and
+        # PctUnemployed from the specification.
+        (
+            "non_significant_pair",
+            "PctNotHSGrad = 0, PctUnemployed = 0",
+            "H0: the two individually non-significant predictors are jointly zero."
+        ),
     ]
 
     rows = [

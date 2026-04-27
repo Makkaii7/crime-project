@@ -3,8 +3,8 @@
 Dep. Variable:     ViolentCrimesPerPop   R-squared:                       0.587
 Model:                             OLS   Adj. R-squared:                  0.585
 Method:                  Least Squares   F-statistic:                     402.6
-Date:                 Sat, 25 Apr 2026   Prob (F-statistic):               0.00
-Time:                         22:19:14   Log-Likelihood:                 956.68
+Date:                 Mon, 27 Apr 2026   Prob (F-statistic):               0.00
+Time:                         23:07:48   Log-Likelihood:                 956.68
 No. Observations:                 1994   AIC:                            -1897.
 Df Residuals:                     1986   BIC:                            -1853.
 Df Model:                            7                                         
