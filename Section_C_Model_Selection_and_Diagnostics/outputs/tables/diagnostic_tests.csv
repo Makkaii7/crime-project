@@ -1,0 +1,9 @@
+test,model,stat,pval,conclusion
+Breusch-Pagan (F),baseline,21.47625068060752,2.1512738176783523e-48,Heteroscedasticity present
+Breusch-Pagan (F),log_remedy,5.2231266937631675,2.9133652419247696e-09,Heteroscedasticity present
+Jarque-Bera,baseline,1351.4582556404382,3.4242741424089396e-294,Non-normal residuals
+Jarque-Bera,log_remedy,2433.6609612457596,0.0,Non-normal residuals
+RESET,baseline,25.516845861253735,1.144778523084202e-11,Misspecification detected
+RESET,log_remedy,70.78350307076217,2.0387605861648234e-30,Misspecification detected
+Durbin-Watson,baseline,1.9999733992354884,,DW ≈ 2.000; no serial dependence concern
+Durbin-Watson,log_remedy,1.9822434980405057,,DW ≈ 1.982; no serial dependence concern
