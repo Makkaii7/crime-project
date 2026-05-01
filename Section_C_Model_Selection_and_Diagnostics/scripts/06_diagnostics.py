@@ -66,12 +66,13 @@ warnings.filterwarnings("ignore")
 # Paths
 # ---------------------------------------------------------------------------
 HERE       = Path(__file__).resolve().parent
+DATA_DIR   = HERE.parent.parent / "data"
 OUTPUTS    = HERE / "outputs"
 TABLES_DIR = OUTPUTS / "tables"
 PLOTS_DIR  = OUTPUTS / "plots"
 
-CLEAN_PATH   = HERE / "communities_clean.csv"
-MASTER_PATH  = HERE / "communities_master.csv"
+CLEAN_PATH   = DATA_DIR / "communities_clean.csv"
+MASTER_PATH  = DATA_DIR / "communities_master.csv"
 SEL_PATH     = OUTPUTS / "task5_selections.json"
 
 TARGET = "ViolentCrimesPerPop"

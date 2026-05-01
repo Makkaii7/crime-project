@@ -50,7 +50,7 @@ np.random.seed(0)
 # Paths — resolve relative to this file.
 # ---------------------------------------------------------------------------
 HERE = Path(__file__).resolve().parent
-DATA_DIR   = HERE            # data files are in same folder when run directly
+DATA_DIR   = HERE.parent.parent / "data"
 OUTPUTS    = HERE / "outputs"
 TABLES_DIR = OUTPUTS / "tables"
 PLOTS_DIR  = OUTPUTS / "plots"
